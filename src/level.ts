@@ -1,8 +1,6 @@
 import * as ex from 'excalibur';
-import { Baddie } from './baddie';
-import { Bot } from './bot';
-import { Floor } from './floor';
-import { NPC } from './npc';
+import {Bot} from './bot';
+import * as wall from './wall';
 
 export class Level extends ex.Scene {
     constructor() {
@@ -13,32 +11,30 @@ export class Level extends ex.Scene {
 
         // Create collision groups for the game
         ex.CollisionGroupManager.create("player");
-        ex.CollisionGroupManager.create("enemy");
-        ex.CollisionGroupManager.create("floor");
+        ex.CollisionGroupManager.create("wall");
 
         // Compose actors in scene
-        const actor = new Bot(engine.halfDrawWidth + 100, engine.halfDrawHeight - 100);
+        const actor = new Bot(500, 500);
+        createWalls(0,0, 20,1).forEach(item => engine.add(item));
+        createWalls(0,0, 1,20).forEach(item => engine.add(item));
 
-        const baddie = new Baddie(engine.halfDrawWidth - 200, 300 - 30, 1);
-        const baddie2 = new Baddie(engine.halfDrawWidth + 200, 300 - 30, -1);
-
-        const npc = new NPC(400, 170);
-        
-        const floor = new Floor(0, 300, 15, 1);
-        const otherFloor = new Floor(engine.halfDrawWidth + 50, 200, 5, 1);
 
         engine.add(actor);
-        engine.add(npc);
-        engine.add(baddie);
-        engine.add(baddie2);
-        engine.add(floor);
-        engine.add(otherFloor);
 
-        // For the test harness to be predicable
-        if (!(window as any).__TESTING) {
-            // Create camera strategy
-            this.camera.clearAllStrategies();
-            this.camera.strategy.elasticToActor(actor, 0.05, 0.1);
+        this.camera.clearAllStrategies();
+        this.camera.strategy.elasticToActor(actor, 0.05, 0.1);
+    }
+
+}
+
+function createWalls(x: number, y: number, width:number, height:number): Array<wall.Wall>{
+    const walls = [];
+
+    for (let i=0; i < width; i++) {
+        for (let j=0; j < height; j++) {
+            walls.push(new wall.Wall(x + i*wall.width, y + j*wall.height));
         }
     }
+
+    return walls;
 }

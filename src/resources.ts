@@ -3,7 +3,7 @@ import * as ex from 'excalibur';
 const botFile = require('../res/excalibot.png');
 const botRedFile = require('../res/excalibot-red.png');
 const baddieFile = require('../res/baddie.png');
-const blockFile = require('../res/block.png');
+const blockFile = require('../res/block-square.png');
 const npcFile = require('../res/npc.png');
 const jumpSound = require('../res/jump.wav');
 const hitSound = require('../res/hurt.wav');
@@ -23,10 +23,10 @@ const Resources = {
 const loader = new ex.Loader();
 
 const botSpriteSheet = ex.SpriteSheet.fromImageSource({
-    image:Resources.bot, 
-    grid: { 
+    image:Resources.bot,
+    grid: {
         columns: 8,
-        rows: 1, 
+        rows: 1,
         spriteWidth: 32,
         spriteHeight: 32
     }
@@ -34,7 +34,7 @@ const botSpriteSheet = ex.SpriteSheet.fromImageSource({
 const botRedSpriteSheet = ex.SpriteSheet.fromImageSource({
     image: Resources.botRed,
     grid: {
-        columns: 8, 
+        columns: 8,
         rows: 1,
         spriteWidth: 32,
         spriteHeight: 32
@@ -43,7 +43,7 @@ const botRedSpriteSheet = ex.SpriteSheet.fromImageSource({
 const baddieSpriteSheet = ex.SpriteSheet.fromImageSource({
     image: Resources.baddie,
     grid: {
-        columns: 6, 
+        columns: 6,
         rows: 1,
         spriteWidth: 32,
         spriteHeight: 32

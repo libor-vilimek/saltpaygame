@@ -2,14 +2,14 @@ import * as ex from 'excalibur';
 import { baddieSpriteSheet, Resources } from "./resources";
 import { Bot } from './bot';
 
-export class Baddie extends ex.Actor {
+export class Customer extends ex.Actor {
     constructor(x: number, y: number, public dir: number) {
         super({
             name: 'Baddie',
             pos: new ex.Vector(x, y),
             collisionGroup: ex.CollisionGroupManager.groupByName("enemy"),
             collisionType: ex.CollisionType.Active,
-            collider: ex.Shape.Box(32, 50, ex.Vector.Half, ex.vec(0, -1)) 
+            collider: ex.Shape.Box(32, 50, ex.Vector.Half, ex.vec(0, -1))
         });
     }
 
@@ -62,7 +62,7 @@ export class Baddie extends ex.Actor {
         }
     }
 
-    // Change animation based on velocity 
+    // Change animation based on velocity
     onPostUpdate() {
         if (this.vel.x < 0) {
             this.graphics.use("left");
@@ -70,5 +70,5 @@ export class Baddie extends ex.Actor {
             this.graphics.use("right");
         }
     }
-    
+
 }
